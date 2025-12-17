@@ -3,16 +3,18 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Home';
+import Product from './Product';
 import Nav from './Nav';
 import Cart from './components/Cart'; 
+import Contact from './Contect.jsx'
 
-// Placeholder for the Contact page
-const Contact = () => (
-    <div className="home-container" style={{ marginTop: '50px' }}>
-        <h2>Contact Page</h2>
-        <p>You can add your contact form or information here.</p>
-    </div>
-); 
+// // Placeholder for the Contact page
+// const Contact = () => (
+//     <div className="home-container" style={{ marginTop: '50px' }}>
+//         <h2>Contact Page</h2>
+//         <p>You can add your contact form or information here.</p>
+//     </div>
+// ); 
 
 const App = () => {
     // STATE: Array to hold unique cart items
@@ -47,7 +49,8 @@ const App = () => {
             <Nav /> 
             <Routes>
                 {/* Home needs the handler function to add to cart */}
-                <Route path="/" element={<Home onAddToCart={handleAddToCart} />} /> 
+                <Route path="/" element={<Home />} />
+                <Route path="/product" element={<Product onAddToCart={handleAddToCart} />} />
                 
                 {/* Cart page needs the cart data and the remove handler */}
                 <Route 
