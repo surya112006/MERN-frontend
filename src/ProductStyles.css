@@ -437,3 +437,48 @@ body {
     border-radius: 10px;
     background-image: radial-gradient(circle at 30% 20%, rgba(255,107,0,0.08), transparent 20%), linear-gradient(135deg, rgba(7,42,64,0.06), rgba(11,120,161,0.03));
 }
+
+/* Full width home hero with background image */
+.home-hero {
+    width: 100%;
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    color: white;
+    background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('https://images.pexels.com/photos/1752757/pexels-photo-1752757.jpeg?cs=srgb&dl=pexels-markus-spiske-1752757.jpg&fm=jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.home-hero .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+.home-hero .hero-title {
+    font-size: 3rem;
+    margin: 0 0 10px 0;
+    font-weight: 800;
+    text-shadow: 0 6px 20px rgba(0,0,0,0.6);
+}
+.home-hero .hero-subtitle {
+    margin: 0 0 18px 0;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.92);
+}
+.hero-shop-btn {
+    display: inline-block;
+    background: #ffd400;
+    color: #072A40;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
+.hero-shop-btn:hover { transform: translateY(-3px); }
+
+@media (max-width: 720px) {
+    .home-hero { min-height: 240px; }
+    .home-hero .hero-title { font-size: 1.8rem; }
+}

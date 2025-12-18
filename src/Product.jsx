@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ProductForm from './components/ProductForm';
 import { productAPI } from './services/api';
+import { SPORTS_PRODUCTS } from './productsData';
 import './ProductStyles.css';
 
 const Product = ({ onAddToCart }) => {
@@ -14,11 +15,17 @@ const Product = ({ onAddToCart }) => {
     try {
       setLoading(true);
       const data = await productAPI.getAllProducts();
-      setProducts(data);
+      if (Array.isArray(data) && data.length > 0) {
+        setProducts(data);
+      } else {
+        setProducts(SPORTS_PRODUCTS);
+      }
       setError(null);
     } catch (err) {
       console.error('Error fetching products:', err);
-      setError(`Failed to load products. Error: ${err.message}`);
+      // fallback to demo sports products when backend is unavailable
+      setProducts(SPORTS_PRODUCTS);
+      setError(null);
     } finally {
       setLoading(false);
     }
@@ -98,22 +105,28 @@ const Product = ({ onAddToCart }) => {
 
       <div id="product-grid" className="product-list-grid">
         {products.map((product) => (
-          <div key={product._id} className="product-card">
+          <div key={product._id || product.id} className="product-card">
             <div className="product-image-container">
               <img src={product.image || 'https://via.placeholder.com/300x200?text=No+Image'} alt={product.name} className="product-image" />
             </div>
             <div className="product-info">
-              <span className="product-category">{product.category}</span>
+              <span className="product-category">{product.category || 'Sports'}</span>
               <h3>{product.name}</h3>
               <p className="product-description">{product.description}</p>
             </div>
             <div className="product-footer">
-              <span className="product-price">Rs {parseFloat(product.price).toFixed(2)}</span>
-              <span className="product-stock">Stock: {product.stock}</span>
+              <span className="product-price">Rs {parseFloat(product.price || 0).toFixed(2)}</span>
+              <span className="product-stock">Stock: {product.stock ?? 'N/A'}</span>
             </div>
             <div className="product-actions">
-              <button onClick={() => handleEditClick(product)} className="action-btn edit-btn">Edit</button>
-              <button onClick={() => handleDeleteProduct(product._id, product.name)} className="action-btn delete-btn">Delete</button>
+              {product._id ? (
+                <>
+                  <button onClick={() => handleEditClick(product)} className="action-btn edit-btn">Edit</button>
+                  <button onClick={() => handleDeleteProduct(product._id, product.name)} className="action-btn delete-btn">Delete</button>
+                </>
+              ) : (
+                <span className="demo-badge">Demo</span>
+              )}
               <button onClick={() => onAddToCart(product)} className="action-btn cart-btn">Add to Cart</button>
             </div>
           </div>
