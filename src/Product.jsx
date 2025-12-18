@@ -47,8 +47,8 @@ const Product = ({ onAddToCart }) => {
       alert(`Product '${name}' deleted successfully.`);
       handleProductOperationComplete();
     } catch (error) {
-      console.error('Error deleting product:', error);
-      alert(`Failed to delete product: ${error.message || 'Server error'}`);
+      // console.error('Error deleting product:', error);
+      // alert(`Failed to delete product: ${error.message || 'Server error'}`);
     }
   };
 
